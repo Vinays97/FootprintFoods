@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Footprint Foods</string>
+    <string name="logo">This is our Logo</string>
+    <string name="welcomeRude">Wag1 Bitch</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+</resources>
