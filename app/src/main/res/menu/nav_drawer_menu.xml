@@ -5,23 +5,31 @@
     <group>
         <item
             android:id="@+id/mItem1"
-            android:title="Item 1" />
+            android:icon="@drawable/ic_orders"
+            android:title="Orders" />
 
         <item
             android:id="@+id/mItem2"
-            android:title="Item 2" />
+            android:icon="@drawable/ic_favourites"
+            android:title="Favorites" />
 
         <item
             android:id="@+id/mItem3"
-            android:title="Item 3" />
+            android:icon="@drawable/ic_address"
+            android:title="Address" />
+
+        <item
+            android:id="@+id/mItem4"
+            android:icon="@drawable/ic_voucher"
+            android:title="Vouchers" />
     </group>
 
     <item android:title="Account Settings">
         <menu>
             <item
                 android:id="@+id/nav_update"
-                android:icon="@drawable/ic_update"
-                android:title="Update Profile" />
+                android:icon="@drawable/ic_settings"
+                android:title="Settings" />
 
             <item
                 android:id="@+id/nav_logout"
