@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
+import com.bumptech.glide.Glide
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 
@@ -23,6 +26,7 @@ class HomeActivity : AppCompatActivity() {
 
         val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
         val navView = findViewById<NavigationView>(R.id.navView)
+        val headerView = navView.getHeaderView(0)
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
@@ -37,13 +41,21 @@ class HomeActivity : AppCompatActivity() {
                     "Clicked item 2", Toast.LENGTH_SHORT).show()
                 R.id.mItem3 -> Toast.makeText(applicationContext,
                     "Clicked item 3", Toast.LENGTH_SHORT).show()
-                R.id.mItem4 -> signOut()
+                R.id.nav_update -> Toast.makeText(applicationContext,
+                    "Clicked Edit", Toast.LENGTH_SHORT).show()
+                R.id.nav_logout -> signOut()
             }
             true
         }
 
         mAuth = FirebaseAuth.getInstance()
         val currentUser = mAuth.currentUser
+
+        val userImage = headerView.findViewById<ImageView>(R.id.userImage)
+        val userName = headerView.findViewById<TextView>(R.id.userName)
+        userName.text = currentUser?.displayName
+        Glide.with(this).load(currentUser?.photoUrl).into(userImage)
+
     }
 
     private fun signOut() {
