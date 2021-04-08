@@ -26,7 +26,7 @@ class SignInActivity : AppCompatActivity() {
         setTheme(R.style.Theme_signInTheme)
         setContentView(R.layout.activity_sign_in)
 
-        val signInButton = findViewById<Button>(R.id.sign_in_button)
+        val signInButton = findViewById<Button>(R.id.signInButton)
 
         // Configure Google Sign In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)

@@ -8,7 +8,7 @@
     tools:context=".SignInActivity">
 
     <ImageView
-        android:id="@+id/welcome_imageView"
+        android:id="@+id/welcomeImageView"
         android:layout_width="300dp"
         android:layout_height="300dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,7 +19,7 @@
         android:contentDescription="@string/logo" />
 
     <com.shobhitpuri.custombuttons.GoogleSignInButton
-        android:id="@+id/sign_in_button"
+        android:id="@+id/signInButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="60dp"

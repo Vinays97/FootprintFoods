@@ -11,4 +11,5 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="loginBackground">#FFFBF4</color>
+    <color name="statusBar">#3A443C</color>
 </resources>

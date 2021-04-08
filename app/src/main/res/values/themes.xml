@@ -1,70 +1,33 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.FootprintFoods" parent="Theme.MaterialComponents.Light">
-        <!-- Primary brand color. -->
-        <!-- Customize your theme here. -->
+    <!-- Application themes. -->
+
+    <style name="Theme.FootprintFoods" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="l">true</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="l">false</item>
         <item name="android:textColorPrimary">@color/textColorPrimary</item>
         <item name="android:navigationBarColor">@color/white</item>
-        <!-- Customize your theme here. -->
-        <item name="android:colorBackground">#FFFBF4</item>
+        <item name="android:statusBarColor">@color/statusBar</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="splashScreenTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_carrot</item>
         <item name="android:statusBarColor">@color/loginBackground</item>
         <item name="android:navigationBarColor">@color/loginBackground</item>
-        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="l">true</item>
     </style>
 
     <style name="Theme.signInTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:statusBarColor">@color/loginBackground</item>
         <item name="android:navigationBarColor">@color/loginBackground</item>
-        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="l">true</item>
     </style>
 
-    <style name="Widget.FootprintFoods.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="hintTextAppearance">@style/TextAppearance.FootprintFoods.TextInputLayout.HintText</item>
-        <item name="hintTextColor">@color/textColorPrimary</item>
-        <item name="android:paddingBottom">8dp</item>
-        <item name="boxStrokeColor">@color/textInputOutlineColor</item>
-    </style>
+    <style name="Theme.appBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar"/>
 
-    <style name="TextAppearance.FootprintFoods.TextInputLayout.HintText" parent="TextAppearance.MaterialComponents.Subtitle2">
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
-    </style>
-
-    <style name="Widget.FootprintFoods.Button" parent="Widget.MaterialComponents.Button">
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
-        <item name="backgroundTint">?attr/colorPrimaryDark</item>
-        <!--
-        <item name="android:stateListAnimator" tools:ignore="NewApi">
-            @animator/shr_next_button_state_list_anim
-        </item>
-        -->
-    </style>
-
-    <style name="Widget.FootprintFoods.Button.TextButton" parent="Widget.MaterialComponents.Button.TextButton">
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
-    </style>
-
-    <style name="Widget.FootprintFoods.Toolbar" parent="Widget.AppCompat.Toolbar">
-        <item name="android:background">?attr/colorAccent</item>
-        <item name="android:theme">@style/Theme.FootprintFoods</item>
-        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
-        <item name="titleTextAppearance">@style/TextAppearance.FootprintFoods.Toolbar</item>
-    </style>
-
-    <style name="TextAppearance.FootprintFoods.Toolbar" parent="TextAppearance.MaterialComponents.Button">
-        <item name="android:textSize">16sp</item>
-    </style>
-
-    <style name="Widget.FootprintFoods.Backdrop" parent="">
-        <item name="android:background">?attr/colorAccent</item>
-    </style>
+    <style name="Theme.popupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
     <!-- Text Appearance -->
 

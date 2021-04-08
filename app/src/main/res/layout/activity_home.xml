@@ -3,29 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawerLayout"
+    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+    <include
         android:layout_height="match_parent"
-        android:background="@color/white">
-
-        <TextView
-            android:id="@+id/welcomeText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/home"
-            android:textAppearance="@style/TextAppearance.FootprintFoods.Body2"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_width="match_parent"
+        layout="@layout/nav_toolbar"
+        />
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navView"
@@ -49,7 +36,7 @@
             >
 
             <TextView
-                android:id="@+id/logout"
+                android:id="@+id/settingsText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/settings"
@@ -62,6 +49,7 @@
                 app:drawableLeftCompat="@drawable/ic_settings"
                 android:textAppearance="@style/TextAppearance.FootprintFoods.Body1"
                 />
+
         </LinearLayout>
 
     </com.google.android.material.navigation.NavigationView>
