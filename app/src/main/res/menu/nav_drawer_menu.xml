@@ -2,40 +2,34 @@
 <menu
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group>
+    <group android:id="@+id/menuGrp1">
         <item
             android:id="@+id/mItem1"
-            android:icon="@drawable/ic_orders"
-            android:title="Orders" />
+            android:icon="@drawable/ic_home"
+            android:title="@string/home" />
 
         <item
             android:id="@+id/mItem2"
-            android:icon="@drawable/ic_favourites"
-            android:title="Favorites" />
+            android:icon="@drawable/ic_orders"
+            android:title="@string/orders" />
 
         <item
             android:id="@+id/mItem3"
-            android:icon="@drawable/ic_address"
-            android:title="Address" />
+            android:icon="@drawable/ic_favourites"
+            android:title="@string/favorites" />
 
         <item
             android:id="@+id/mItem4"
             android:icon="@drawable/ic_voucher"
-            android:title="Vouchers" />
+            android:title="@string/vouchers" />
     </group>
 
-    <item android:title="Account Settings">
-        <menu>
-            <item
-                android:id="@+id/nav_update"
-                android:icon="@drawable/ic_settings"
-                android:title="Settings" />
+    <group android:id="@+id/menuGrp2">
 
-            <item
-                android:id="@+id/nav_logout"
-                android:icon="@drawable/ic_sign_out"
-                android:title="Sign Out" />
-        </menu>
-    </item>
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_sign_out"
+            android:title="@string/sign_out" />
+    </group>
 
 </menu>

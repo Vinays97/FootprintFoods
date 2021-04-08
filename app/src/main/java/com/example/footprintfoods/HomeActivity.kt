@@ -41,8 +41,6 @@ class HomeActivity : AppCompatActivity() {
                     "Clicked item 2", Toast.LENGTH_SHORT).show()
                 R.id.mItem3 -> Toast.makeText(applicationContext,
                     "Clicked item 3", Toast.LENGTH_SHORT).show()
-                R.id.nav_update -> Toast.makeText(applicationContext,
-                    "Clicked Edit", Toast.LENGTH_SHORT).show()
                 R.id.nav_logout -> signOut()
             }
             true
