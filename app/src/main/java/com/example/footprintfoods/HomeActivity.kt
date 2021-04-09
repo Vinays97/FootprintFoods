@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.widget.Toolbar
@@ -25,7 +24,6 @@ class HomeActivity : AppCompatActivity() {
     lateinit var orderFragment: OrderFragment
     lateinit var favoritesFragment: FavoritesFragment
     lateinit var voucherFragment: VoucherFragment
-    lateinit var settingsFragment: SettingsFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +33,7 @@ class HomeActivity : AppCompatActivity() {
         val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
         val navView = findViewById<NavigationView>(R.id.navView)
         val headerView = navView.getHeaderView(0)
+        val welcomeText = findViewById<TextView>(R.id.welcomeNameText)
         setSupportActionBar(toolBar)
         val toggle = ActionBarDrawerToggle(this, drawerLayout, toolBar, R.string.open, R.string.close)
         toggle.isDrawerIndicatorEnabled = true
@@ -93,7 +92,9 @@ class HomeActivity : AppCompatActivity() {
 
         val userImage = headerView.findViewById<ImageView>(R.id.userImage)
         val userName = headerView.findViewById<TextView>(R.id.userName)
+        val firstName = currentUser?.displayName?.split(" ")?.getOrNull(0)
         userName.text = currentUser?.displayName
+        welcomeText.text = ("Hey, $firstName")
         Glide.with(this).load(currentUser?.photoUrl).into(userImage)
 
     }

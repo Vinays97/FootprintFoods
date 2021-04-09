@@ -8,8 +8,9 @@
         <item name="android:windowLightStatusBar" tools:targetApi="l">false</item>
         <item name="android:textColorPrimary">@color/textColorPrimary</item>
         <item name="android:navigationBarColor">@color/white</item>
-        <item name="android:statusBarColor">@color/statusBar</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
 
     <style name="splashScreenTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -25,9 +26,15 @@
         <item name="android:windowLightStatusBar" tools:targetApi="l">true</item>
     </style>
 
-    <style name="Theme.appBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar"/>
+    <!-- Toolbar Styling -->
 
-    <style name="Theme.popupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+    <style name="TextAppearance.App.CollapsingToolbar.Expanded" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+    </style>
+
+    <style name="TextAppearance.App.CollapsingToolbar.Collapsed" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+    </style>
 
     <!-- Text Appearance -->
 
