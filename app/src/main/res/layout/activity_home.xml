@@ -9,91 +9,7 @@
     tools:context=".HomeActivity"
     tools:openDrawer="start">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
-
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.AppBarLayout.PrimarySurface"
-            android:fitsSystemWindows="true"
-            >
-
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:expandedTitleMarginStart="72dp"
-                app:expandedTitleMarginBottom="28dp"
-                app:expandedTitleTextAppearance="@style/TextAppearance.App.CollapsingToolbar.Expanded"
-                app:collapsedTitleTextAppearance="@style/TextAppearance.App.CollapsingToolbar.Collapsed"
-                android:fitsSystemWindows="true"
-                android:background="@color/colorPrimary">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginBottom="16dp"
-                    android:layout_marginTop="60dp"
-                    android:orientation="vertical"
-                    android:layout_gravity="bottom">
-
-                    <TextView
-                        android:id="@+id/welcomeNameText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:textAppearance="@style/TextAppearance.FootprintFoods.Headline5"
-                        android:textStyle="bold"
-                        />
-                    <TextView
-                        android:id="@+id/welcomeMessageText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="1dp"
-                        android:text="@string/hungry"
-                        android:textColor="@color/black"
-                        android:textAppearance="@style/TextAppearance.FootprintFoods.Body2"
-                        />
-
-                </LinearLayout>
-
-                <com.google.android.material.appbar.MaterialToolbar
-                    android:id="@+id/toolBar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    app:title=" "
-                    style="@style/Widget.MaterialComponents.Toolbar.PrimarySurface"
-                    android:background="@android:color/transparent"
-                    android:elevation="0dp"
-                    app:layout_collapseMode="pin"
-                    />
-
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-        </com.google.android.material.appbar.AppBarLayout>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/frameLayout"
-            >
-
-            <androidx.core.widget.NestedScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-                <!-- Scrollable content -->
-
-            </androidx.core.widget.NestedScrollView>
-
-        </FrameLayout>
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <include layout="@layout/toolbar_layout"/>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navView"
@@ -103,6 +19,9 @@
         app:menu="@menu/nav_drawer_menu"
         android:layout_gravity="start"
         app:itemTextAppearance="@style/TextAppearance.FootprintFoods.Body1"
+        app:itemIconTint="@drawable/drawer_item_color"
+        app:itemTextColor="@drawable/drawer_item_color"
+        app:itemShapeFillColor="@drawable/drawer_item_background"
         />
 
 </androidx.drawerlayout.widget.DrawerLayout>

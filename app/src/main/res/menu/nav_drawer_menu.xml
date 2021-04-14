@@ -2,7 +2,7 @@
 <menu
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:id="@+id/menuGrp1"
+    <group android:id="@+id/navMenuGrp1"
         android:checkableBehavior="single">
         <item
             android:id="@+id/mItem1"
@@ -18,7 +18,7 @@
 
         <item
             android:id="@+id/mItem3"
-            android:icon="@drawable/ic_favourites"
+            android:icon="@drawable/ic_favourites_filled"
             android:title="@string/favorites" />
 
         <item

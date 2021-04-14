@@ -12,4 +12,8 @@
     <color name="black">#000000</color>
     <color name="loginBackground">#FFFBF4</color>
     <color name="statusBar">#3A443C</color>
+    <color name="navDrawerItem">#9638E6</color>
+    <color name="navDrawerBackground">#ECE0fD</color>
+    <color name="defaultIcon">#808080</color>
+    <color name="searchBar">#E6EBEF</color>
 </resources>
