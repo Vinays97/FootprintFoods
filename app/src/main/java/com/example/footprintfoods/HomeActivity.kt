@@ -1,9 +1,11 @@
 package com.example.footprintfoods
 
+import android.content.ContentValues
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
@@ -13,16 +15,20 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentTransaction
 import com.bumptech.glide.Glide
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class HomeActivity : AppCompatActivity() {
 
     // Initialise Firebase variables
     lateinit var toggle: ActionBarDrawerToggle
     private lateinit var mAuth: FirebaseAuth
+    private val db = Firebase.firestore
     // Initialise fragment variables
     lateinit var homeFragment: HomeFragment
     lateinit var orderFragment: OrderFragment
@@ -35,6 +41,8 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var btnOrder: Button
     private lateinit var btnCalendar: Button
     private lateinit var btnSearch: Button
+    // Array for firebase DB
+    public val itemTitles: MutableList<String> = ArrayList()
 
     // onCreate function
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +58,8 @@ class HomeActivity : AppCompatActivity() {
         val welcomeText = findViewById<TextView>(R.id.welcomeNameText)
         // Setup toolbar
         setSupportActionBar(toolBar)
+        // Pull from DB
+        databasePull()
         // Setup navigation drawer toggle
         val toggle = ActionBarDrawerToggle(this, drawerLayout, toolBar, R.string.open, R.string.close)
         toggle.isDrawerIndicatorEnabled = true
@@ -71,7 +81,7 @@ class HomeActivity : AppCompatActivity() {
         supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.frameLayout, homeFragment)
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .commit()
         // Setting button styles programmatically -_-
         resetHeaderButtons()
@@ -81,7 +91,8 @@ class HomeActivity : AppCompatActivity() {
             btnOrder.isActivated = false
             btnCalendar.isActivated = false
             btnSearch.setText(R.string.search_bar_market)
-            Handler().postDelayed({marketClick()}, 300)
+            btnSearch.isVisible = true
+            Handler().postDelayed({marketClick()}, 200)
         }
         // Order button onClick
         btnOrder.setOnClickListener{
@@ -89,7 +100,8 @@ class HomeActivity : AppCompatActivity() {
             btnOrder.isActivated = true
             btnCalendar.isActivated = false
             btnSearch.setText(R.string.search_bar_order)
-            Handler().postDelayed({orderClick()}, 300)
+            btnSearch.isVisible = true
+            Handler().postDelayed({orderClick()}, 200)
         }
         // Calendar button onClick
         btnCalendar.setOnClickListener{
@@ -97,7 +109,8 @@ class HomeActivity : AppCompatActivity() {
             btnOrder.isActivated = false
             btnCalendar.isActivated = true
             btnSearch.setText(R.string.search_bar_calendar)
-            Handler().postDelayed({calendarClick()}, 300)
+            btnSearch.isVisible = true
+            Handler().postDelayed({calendarClick()}, 200)
         }
         // Navigation drawer onClick
         navView.setNavigationItemSelectedListener {
@@ -107,7 +120,7 @@ class HomeActivity : AppCompatActivity() {
                     supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.frameLayout, homeFragment)
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                         .commit()
                 }
                 R.id.mItem2 -> {
@@ -118,7 +131,7 @@ class HomeActivity : AppCompatActivity() {
                     supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.frameLayout, orderFragment)
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                         .commit()
                 }
                 R.id.mItem3 -> {
@@ -126,7 +139,7 @@ class HomeActivity : AppCompatActivity() {
                     supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.frameLayout, favoritesFragment)
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                         .commit()
                 }
                 R.id.mItem4 -> {
@@ -134,7 +147,7 @@ class HomeActivity : AppCompatActivity() {
                     supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.frameLayout, voucherFragment)
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                         .commit()
                 }
                 R.id.nav_logout -> signOut()
@@ -160,7 +173,7 @@ class HomeActivity : AppCompatActivity() {
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.frameLayout, calendarFragment)
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             .commit()
     }
 
@@ -169,7 +182,7 @@ class HomeActivity : AppCompatActivity() {
         supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.frameLayout, orderFragment)
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .commit()
     }
 
@@ -178,7 +191,7 @@ class HomeActivity : AppCompatActivity() {
         supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.frameLayout, marketFragment)
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .commit()
     }
 
@@ -188,6 +201,7 @@ class HomeActivity : AppCompatActivity() {
         btnOrder.isActivated = false
         btnCalendar.isActivated = false
         btnSearch.setText(R.string.search_bar_text)
+        btnSearch.isVisible = false
     }
 
     // Sign out function
@@ -203,5 +217,24 @@ class HomeActivity : AppCompatActivity() {
             return true
         }
         return super.onOptionsItemSelected(item)
+    }
+    // Database pull function
+    private fun databasePull() {
+        itemTitles.clear()
+        db.collection("Foodmarkets")
+            .get()
+            .addOnSuccessListener { result ->
+                if (result != null) {
+                    Log.d(ContentValues.TAG, "Starting pulling from DB")
+                    for (document in result) {
+                        itemTitles.add(document.id)
+                        Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
+                    }
+                    Log.d(ContentValues.TAG, "Done from DB")
+                    Log.d(ContentValues.TAG, "itemTitles = $itemTitles")
+                } else {
+                    Log.d(ContentValues.TAG, "No results")
+                }
+            }
     }
 }

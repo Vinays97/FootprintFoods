@@ -23,4 +23,5 @@
     <string name="markets">Markets</string>
     <string name="calendar">Calendar</string>
     <string name="market">Market</string>
+    <string name="image_of_market">Image of Market</string>
 </resources>
