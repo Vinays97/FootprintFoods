@@ -1,6 +1,7 @@
 package com.example.footprintfoods
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import kotlin.coroutines.coroutineContext
 
 class RecyclerViewAdapter(itemTitlesImport: MutableList<String>) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
@@ -17,6 +19,16 @@ class RecyclerViewAdapter(itemTitlesImport: MutableList<String>) : RecyclerView.
     inner class ViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView){
         var image : ImageView = itemView.findViewById(R.id.marketImage)
         var textTitle: TextView = itemView.findViewById(R.id.marketTitle)
+
+        init {
+            itemView.setOnClickListener{ v: View ->
+                val position: Int = adapterPosition
+                val itemTitle: String = itemTitles[position]
+                val intent = Intent(v.context, MarketActivity::class.java)
+                intent.putExtra("itemTitle", itemTitle)
+                v.context.startActivity(intent)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,11 +41,6 @@ class RecyclerViewAdapter(itemTitlesImport: MutableList<String>) : RecyclerView.
         Log.d(TAG, "Added to adapter")
         Log.d(TAG, "Displaying Views")
         holder.textTitle.text = itemTitles[position]
-
-        holder.itemView.setOnClickListener{v : View ->
-            Toast.makeText(v.context, "Clicked item", Toast.LENGTH_SHORT).show()
-        }
-
     }
 
     override fun getItemCount(): Int {

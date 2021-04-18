@@ -52,6 +52,18 @@
         <item name="cornerRadius">12dp</item>
     </style>
 
+    <!-- Market Page Styling -->
+
+    <style name="Widget.App.Button.OutlinedButton.SearchBar.Market" parent="Widget.MaterialComponents.Button">
+        <item name="iconTint">@color/black</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textAppearance">@style/TextAppearance.FootprintFoods.Body1</item>
+        <item name="backgroundTint">@color/white</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+
     <!-- Text Appearance -->
 
     <style name="TextAppearance.FootprintFoods.Headline1" parent="TextAppearance.MaterialComponents.Headline1">

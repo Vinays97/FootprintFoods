@@ -6,8 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import android.view.Menu
 import android.view.MenuItem
+import android.view.Window
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -51,13 +52,14 @@ class HomeActivity : AppCompatActivity() {
         setTheme(R.style.Theme_FootprintFoods)
         setContentView(R.layout.activity_home)
         // Initialise variables
-        val toolBar = findViewById<Toolbar>(R.id.toolBar)
+        val toolBar = findViewById<Toolbar>(R.id.homeToolbar)
         val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
         val navView = findViewById<NavigationView>(R.id.navView)
         val headerView = navView.getHeaderView(0)
         val welcomeText = findViewById<TextView>(R.id.welcomeNameText)
         // Setup toolbar
         setSupportActionBar(toolBar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
         // Pull from DB
         databasePull()
         // Setup navigation drawer toggle
@@ -80,7 +82,7 @@ class HomeActivity : AppCompatActivity() {
         // Set home fragment
         supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.frameLayout, homeFragment)
+                .replace(R.id.homeFrameLayout, homeFragment)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .commit()
         // Setting button styles programmatically -_-
@@ -119,7 +121,7 @@ class HomeActivity : AppCompatActivity() {
                     resetHeaderButtons()
                     supportFragmentManager
                         .beginTransaction()
-                        .replace(R.id.frameLayout, homeFragment)
+                        .replace(R.id.homeFrameLayout, homeFragment)
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                         .commit()
                 }
@@ -130,7 +132,7 @@ class HomeActivity : AppCompatActivity() {
                     btnSearch.setText(R.string.search_bar_order)
                     supportFragmentManager
                         .beginTransaction()
-                        .replace(R.id.frameLayout, orderFragment)
+                        .replace(R.id.homeFrameLayout, orderFragment)
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                         .commit()
                 }
@@ -138,7 +140,7 @@ class HomeActivity : AppCompatActivity() {
                     resetHeaderButtons()
                     supportFragmentManager
                         .beginTransaction()
-                        .replace(R.id.frameLayout, favoritesFragment)
+                        .replace(R.id.homeFrameLayout, favoritesFragment)
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                         .commit()
                 }
@@ -146,7 +148,7 @@ class HomeActivity : AppCompatActivity() {
                     resetHeaderButtons()
                     supportFragmentManager
                         .beginTransaction()
-                        .replace(R.id.frameLayout, voucherFragment)
+                        .replace(R.id.homeFrameLayout, voucherFragment)
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                         .commit()
                 }
@@ -172,7 +174,7 @@ class HomeActivity : AppCompatActivity() {
     private fun calendarClick() {
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.frameLayout, calendarFragment)
+            .replace(R.id.homeFrameLayout, calendarFragment)
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             .commit()
     }
@@ -181,7 +183,7 @@ class HomeActivity : AppCompatActivity() {
     private fun orderClick() {
         supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.frameLayout, orderFragment)
+                .replace(R.id.homeFrameLayout, orderFragment)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .commit()
     }
@@ -190,7 +192,7 @@ class HomeActivity : AppCompatActivity() {
     private fun marketClick() {
         supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.frameLayout, marketFragment)
+                .replace(R.id.homeFrameLayout, marketFragment)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .commit()
     }
