@@ -41,7 +41,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
                     android:contentDescription="@string/image_of_market"
-                    android:src="@drawable/streetfood"
                     android:scaleType="centerCrop"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -116,6 +115,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     android:maxLines="1"
                     android:textAlignment="viewStart"
                     android:text="@string/market_button"
@@ -125,7 +125,9 @@
                     app:layout_constraintTop_toBottomOf="@id/marketToolbarSubtitle"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     />
+                <!--
                 <TextView
                     android:id="@+id/marketToolbarDescription"
                     android:layout_width="match_parent"
@@ -134,13 +136,14 @@
                     android:layout_marginHorizontal="24dp"
                     android:gravity="start"
                     android:textColor="@color/black"
-                    android:text="@string/test"
+                    android:text="@string/settings"
                     android:textAppearance="@style/TextAppearance.FootprintFoods.Body1"
                     app:layout_constraintTop_toBottomOf="@id/marketToolbarButton"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     />
+                    -->
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -150,15 +153,18 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:layout_gravity="bottom"
-            app:tabContentStart="72dp"
+            android:background="@color/colorAccent"
+            app:tabTextAppearance="@style/TextAppearance.FootprintFoods.Button"
+            app:tabGravity="fill"
+            app:tabInlineLabel="true"
             app:tabMode="scrollable" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <FrameLayout
+    <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/marketFrameLayout"
+        android:id="@+id/marketViewPager"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         />
 

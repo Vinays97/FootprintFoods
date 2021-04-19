@@ -7,17 +7,16 @@ import android.os.Handler
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
-
+    // Setup Firebase variables
     private lateinit var mAuth: FirebaseAuth
-
+    // onCreate function
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.Theme_FootprintFoods)
         setContentView(R.layout.activity_main)
-
+        // Initialise variables
         mAuth = FirebaseAuth.getInstance()
         val user = mAuth.currentUser
-
         //Checks if user is already authenticated.
         if(user != null){
             val homeIntent = Intent(this, HomeActivity::class.java)

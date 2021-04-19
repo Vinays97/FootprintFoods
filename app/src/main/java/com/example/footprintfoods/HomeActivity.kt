@@ -7,8 +7,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.MenuItem
-import android.view.Window
-import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -25,25 +23,25 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class HomeActivity : AppCompatActivity() {
-
-    // Initialise Firebase variables
+    // Setup Firebase variables
     lateinit var toggle: ActionBarDrawerToggle
     private lateinit var mAuth: FirebaseAuth
     private val db = Firebase.firestore
-    // Initialise fragment variables
+    // Setup fragment variables
     lateinit var homeFragment: HomeFragment
     lateinit var orderFragment: OrderFragment
     lateinit var favoritesFragment: FavoritesFragment
     lateinit var voucherFragment: VoucherFragment
     lateinit var marketFragment: MarketFragment
     lateinit var calendarFragment: CalendarFragment
-    // Initialise button variables
+    // Setup button variables
     private lateinit var btnMarket: Button
     private lateinit var btnOrder: Button
     private lateinit var btnCalendar: Button
     private lateinit var btnSearch: Button
-    // Array for firebase DB
+    // Setup array for firebase DB
     public val itemTitles: MutableList<String> = ArrayList()
+    public val itemURLs: MutableList<String> = ArrayList()
 
     // onCreate function
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -230,10 +228,12 @@ class HomeActivity : AppCompatActivity() {
                     Log.d(ContentValues.TAG, "Starting pulling from DB")
                     for (document in result) {
                         itemTitles.add(document.id)
+                        itemURLs.add(document.get("photoURL").toString())
                         Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
                     }
                     Log.d(ContentValues.TAG, "Done from DB")
                     Log.d(ContentValues.TAG, "itemTitles = $itemTitles")
+                    Log.d(ContentValues.TAG, "itemURLs = $itemURLs")
                 } else {
                     Log.d(ContentValues.TAG, "No results")
                 }

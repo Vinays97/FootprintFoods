@@ -9,11 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 
 class MarketFragment : Fragment() {
-
     // Initialise RecyclerView variables
     private var layoutManager : RecyclerView.LayoutManager? = null
     private var adapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>? = null
@@ -32,6 +29,7 @@ class MarketFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val itemTitles = (activity as HomeActivity).itemTitles
+        val itemURLs = (activity as HomeActivity).itemURLs
 
         Log.d(ContentValues.TAG, "Event after DB pull")
         // Initialise layoutManager
@@ -41,7 +39,7 @@ class MarketFragment : Fragment() {
             recyclerView.layoutManager = layoutManager
         }
         Log.d(ContentValues.TAG, "Sending to Adapter")
-        adapter = RecyclerViewAdapter(itemTitles)
+        adapter = RecyclerViewAdapter(itemTitles, itemURLs)
         if (recyclerView != null) {
             recyclerView.adapter = adapter
         }

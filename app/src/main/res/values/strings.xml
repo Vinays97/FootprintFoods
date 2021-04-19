@@ -14,7 +14,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hungry">Hungry?</string>
     <string name="logo">This is our Logo</string>
-    <string name="market_button">Distance • Town • View map</string>
+    <string name="market_button">Address • Town • Postcode</string>
     <string name="search_bar_text">Search</string>
     <string name="search_bar_market">Find a market</string>
     <string name="search_bar_order">Find an order</string>
