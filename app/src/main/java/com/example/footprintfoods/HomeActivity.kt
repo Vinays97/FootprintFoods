@@ -21,6 +21,10 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.Timestamp
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class HomeActivity : AppCompatActivity() {
     // Setup Firebase variables
@@ -39,9 +43,10 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var btnOrder: Button
     private lateinit var btnCalendar: Button
     private lateinit var btnSearch: Button
-    // Setup array for firebase DB
-    public val itemTitles: MutableList<String> = ArrayList()
-    public val itemURLs: MutableList<String> = ArrayList()
+    // Setup variables for DB pull
+    public var itemTitles: MutableList<String> = ArrayList()
+    public var itemURLs: MutableList<String> = ArrayList()
+    public var itemDates: MutableList<String> = ArrayList()
 
     // onCreate function
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -221,6 +226,8 @@ class HomeActivity : AppCompatActivity() {
     // Database pull function
     private fun databasePull() {
         itemTitles.clear()
+        itemURLs.clear()
+        itemDates.clear()
         db.collection("Foodmarkets")
             .get()
             .addOnSuccessListener { result ->
@@ -229,11 +236,17 @@ class HomeActivity : AppCompatActivity() {
                     for (document in result) {
                         itemTitles.add(document.id)
                         itemURLs.add(document.get("photoURL").toString())
-                        Log.d(ContentValues.TAG, "${document.id} => ${document.data}")
+                        val itemDate: Timestamp = document.get("Date") as Timestamp
+                        val milli = itemDate.seconds * 1000 + itemDate.nanoseconds / 1000000
+                        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
+                        val netDate = Date(milli)
+                        val date = sdf.format(netDate)
+                        itemDates.add(date)
                     }
                     Log.d(ContentValues.TAG, "Done from DB")
                     Log.d(ContentValues.TAG, "itemTitles = $itemTitles")
                     Log.d(ContentValues.TAG, "itemURLs = $itemURLs")
+                    Log.d(ContentValues.TAG, "itemDates = $itemDates")
                 } else {
                     Log.d(ContentValues.TAG, "No results")
                 }

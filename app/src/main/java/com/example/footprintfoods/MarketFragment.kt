@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 class MarketFragment : Fragment() {
     // Initialise RecyclerView variables
     private var layoutManager : RecyclerView.LayoutManager? = null
-    private var adapter : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>? = null
+    private var adapter : RecyclerView.Adapter<MarketRecyclerViewAdapter.ViewHolder>? = null
     // onCreate function
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,9 +27,10 @@ class MarketFragment : Fragment() {
     // onViewCreated function
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        // Initialise Variables
         val itemTitles = (activity as HomeActivity).itemTitles
         val itemURLs = (activity as HomeActivity).itemURLs
+        val itemDates = (activity as HomeActivity).itemDates
 
         Log.d(ContentValues.TAG, "Event after DB pull")
         // Initialise layoutManager
@@ -39,7 +40,7 @@ class MarketFragment : Fragment() {
             recyclerView.layoutManager = layoutManager
         }
         Log.d(ContentValues.TAG, "Sending to Adapter")
-        adapter = RecyclerViewAdapter(itemTitles, itemURLs)
+        adapter = MarketRecyclerViewAdapter(itemTitles, itemURLs, itemDates)
         if (recyclerView != null) {
             recyclerView.adapter = adapter
         }

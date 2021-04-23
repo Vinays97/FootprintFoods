@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView android:id="@+id/marketCards"
+<androidx.cardview.widget.CardView
+    android:id="@+id/marketCards"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:transitionName="@string/market_card_title"
     app:cardCornerRadius="8dp"
     android:layout_marginHorizontal="24dp"
-    android:layout_marginVertical="16dp"
+    android:layout_marginVertical="8dp"
     android:foreground="?selectableItemBackground"
     android:clickable="true"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -21,7 +23,9 @@
             android:layout_height="200dp"
             android:src="@drawable/logo"
             android:scaleType="centerCrop"
-            android:contentDescription="@string/image_of_market" />
+            android:contentDescription="@string/image_of_market"
+            android:transitionName="@string/market_card_image"
+            />
 
         <TextView
             android:id="@+id/marketTitle"
@@ -32,7 +36,21 @@
             android:layout_marginTop="12dp"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
-            android:layout_marginBottom="12dp"
+            />
+
+        <TextView
+            android:id="@+id/marketDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/settings"
+            android:textAppearance="@style/TextAppearance.FootprintFoods.Body2"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center_vertical"
+            app:drawableStartCompat="@drawable/ic_calendar"
+            android:drawablePadding="4dp"
             />
 
     </LinearLayout>

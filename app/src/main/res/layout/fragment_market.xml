@@ -6,9 +6,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MarketFragment">
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/marketRecyclerView"
+        android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
