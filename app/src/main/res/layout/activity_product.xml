@@ -57,90 +57,211 @@
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         >
-        <androidx.constraintlayout.widget.ConstraintLayout
+
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/productDetailsAppbarLayout"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:fillViewport="true"
             >
-
-            <TextView
-                android:id="@+id/productDescriptionTitle"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginHorizontal="16dp"
-                android:gravity="start"
-                android:textAppearance="@style/TextAppearance.FootprintFoods.Headline5"
-                android:textStyle="bold"
-                android:text="@string/description"
+                app:layout_constraintTop_toBottomOf="@id/productDetailsAppbarLayout"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                />
+                app:layout_constraintEnd_toEndOf="parent"
+                >
 
-            <TextView
-                android:id="@+id/productDetailsDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginHorizontal="16dp"
-                android:gravity="start"
-                android:textAppearance="@style/TextAppearance.FootprintFoods.Body1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/productDescriptionTitle"
-                />
+                <TextView
+                    android:id="@+id/productDescriptionTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:gravity="start"
+                    android:textAppearance="@style/TextAppearance.FootprintFoods.Headline5"
+                    android:textStyle="bold"
+                    android:text="@string/description"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
 
-            <TextView
-                android:id="@+id/productDetailsFarmer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginHorizontal="16dp"
-                android:gravity="start"
-                android:textAppearance="@style/TextAppearance.FootprintFoods.Headline5"
-                android:textStyle="bold"
-                android:text="@string/choose_a_farmer"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/productDetailsDescription"
-                />
+                <TextView
+                    android:id="@+id/productDetailsDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:gravity="start"
+                    android:textAppearance="@style/TextAppearance.FootprintFoods.Body1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/productDescriptionTitle"
+                    />
 
-            <RadioGroup
-                android:id="@+id/productDetailsFarmerRadio"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginHorizontal="24dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/productDetailsFarmer"
-                />
+                <View
+                    android:id="@+id/productDetailsDescriptionSpace"
+                    android:layout_height="1dp"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:background="@color/defaultIcon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/productDetailsDescription"
+                    />
 
-            <TextView
-                android:id="@+id/productDetailsUsage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginHorizontal="16dp"
-                android:gravity="start"
-                android:textAppearance="@style/TextAppearance.FootprintFoods.Headline5"
-                android:textStyle="bold"
-                android:text="@string/storage"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/productDetailsFarmerRadio"
-                />
+                <TextView
+                    android:id="@+id/productDetailsFarmer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:gravity="start"
+                    android:textAppearance="@style/TextAppearance.FootprintFoods.Headline5"
+                    android:textStyle="bold"
+                    android:text="@string/choose_a_farmer"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/productDetailsDescriptionSpace"
+                    />
 
-            <TextView
-                android:id="@+id/productDetailsUsageDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginHorizontal="16dp"
-                android:gravity="start"
-                android:textAppearance="@style/TextAppearance.FootprintFoods.Body1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/productDetailsUsage"
-                />
+                <LinearLayout
+                    android:id="@+id/productDetailsRadioLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/productDetailsFarmer"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    >
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                    <RadioGroup
+                        android:id="@+id/productDetailsFarmerRadio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginHorizontal="24dp"
+                        />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/productDetailsFarmerSpace"
+                    android:layout_height="1dp"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:background="@color/defaultIcon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/productDetailsRadioLayout"
+                    />
+
+                <TextView
+                    android:id="@+id/productDetailsUsage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:gravity="start"
+                    android:textAppearance="@style/TextAppearance.FootprintFoods.Headline5"
+                    android:textStyle="bold"
+                    android:text="@string/storage"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/productDetailsFarmerSpace"
+                    />
+
+                <TextView
+                    android:id="@+id/productDetailsUsageDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:gravity="start"
+                    android:textAppearance="@style/TextAppearance.FootprintFoods.Body1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/productDetailsUsage"
+                    />
+
+                <View
+                    android:id="@+id/productDetailsUsageSpace"
+                    android:layout_height="1dp"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:background="@color/defaultIcon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/productDetailsUsageDescription"
+                    />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/productDetailsQuantityLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/productDetailsUsageSpace"
+                    >
+
+                    <Button
+                        android:id="@+id/productDetailsMinus"
+                        style="@style/Widget.App.Button.OutlinedButton.IconOnly.Product"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="24dp"
+                        app:icon="@drawable/ic_minus"
+                        app:iconTint="@color/colorAccent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/productDetailsQuantityText"
+                        />
+
+                    <TextView
+                        android:id="@+id/productDetailsQuantityText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:textAppearance="@style/TextAppearance.FootprintFoods.Headline4"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        />
+
+                    <Button
+                        android:id="@+id/productDetailsPlus"
+                        style="@style/Widget.App.Button.OutlinedButton.IconOnly.Product"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        app:icon="@drawable/ic_plus"
+                        app:iconTint="@color/colorAccent"
+                        app:layout_constraintStart_toEndOf="@id/productDetailsQuantityText"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginHorizontal="46dp"
+                    android:gravity="center"
+                    android:text="@string/add_to_cart"
+                    android:backgroundTint="@color/colorAccent"
+                    app:elevation="4dp"
+                    app:layout_constraintTop_toBottomOf="@id/productDetailsQuantityLayout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:icon="@drawable/ic_add_to_cart"
+                    app:iconPadding="16dp"
+                    app:iconGravity="textStart"
+                    style="@style/Widget.MaterialComponents.Button"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
     </FrameLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

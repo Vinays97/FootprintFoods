@@ -37,4 +37,6 @@
     <string name="use_and_storage">Use and Storage</string>
     <string name="storage">Storage Information</string>
     <string name="description">Description</string>
+    <string name="add_to_cart">ADD TO CART</string>
+    <string name="tab">\u0009</string>
 </resources>
