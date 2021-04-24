@@ -1,18 +1,23 @@
 package com.example.footprintfoods
 
+import android.app.Activity
 import android.content.ContentValues
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class ProductRecyclerViewAdapter(marketProduceImport: MutableList<String>) : RecyclerView.Adapter<ProductRecyclerViewAdapter.ViewHolder>() {
+class ProductRecyclerViewAdapter(marketProduceImport: MutableList<String>, marketTitleImport: String, productCategoryImport: String) : RecyclerView.Adapter<ProductRecyclerViewAdapter.ViewHolder>() {
     // Assign Variables
     private val marketProduce = marketProduceImport
+    private val marketTitle = marketTitleImport
+    private val productCategory = productCategoryImport
     // Inner class
     inner class ViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView){
         // Initialise card variables
@@ -25,6 +30,31 @@ class ProductRecyclerViewAdapter(marketProduceImport: MutableList<String>) : Rec
         init {
             itemView.setOnClickListener { v: View ->
                 val position: Int = adapterPosition
+                val prodTitle = marketProduce[position].substring(0, marketProduce[position].indexOf("/"))
+                Log.d(ContentValues.TAG, "Product Title: $prodTitle")
+                val rem = marketProduce[position].substring(marketProduce[position].indexOf("/") + 1, marketProduce[position].length)
+                Log.d(ContentValues.TAG, "Rem: $rem")
+                val prodCarbon = "${rem.substring(0, rem.indexOf("/"))} CO\u2082e"
+                Log.d(ContentValues.TAG, "Product Carbon: $prodCarbon")
+                val rem2 = rem.substring(rem.indexOf("/") + 1, rem.length)
+                Log.d(ContentValues.TAG, "Rem2: $rem2")
+                val prodPrice = "£${rem2.substring(0, rem2.indexOf("/"))}/kg"
+                Log.d(ContentValues.TAG, "Product Price: $prodPrice")
+                val url = rem2.substring(rem2.indexOf("/") + 1, rem2.length - 1)
+                Log.d(ContentValues.TAG, "URL: $url")
+                val intent = Intent(v.context, ProductActivity::class.java)
+                intent.putExtra("prodTitle", prodTitle)
+                intent.putExtra("prodCarbon", prodCarbon)
+                intent.putExtra("prodPrice", prodPrice)
+                intent.putExtra("url", url)
+                intent.putExtra("marketTitle", marketTitle)
+                intent.putExtra("productCategory", productCategory)
+                intent.putExtra("transitionNameImage", R.string.product_card_image.toString())
+                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        v.context as Activity,
+                        image,
+                        R.string.product_card_image.toString())
+                v.context.startActivity(intent, options.toBundle())
             }
         }
     }

@@ -31,6 +31,8 @@ class FruitFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         // Initialise Variables
         val marketProduce = (activity as MarketActivity).marketProduceFruit
+        val marketTitle = (activity as MarketActivity).marketTitle
+        val productCategory = "Fruit"
         // Initialise layoutManager
         val recyclerView = view.findViewById<RecyclerView>(R.id.marketFruitRecyclerView)
         layoutManager = LinearLayoutManager(activity)
@@ -38,7 +40,7 @@ class FruitFragment : Fragment() {
             recyclerView.layoutManager = layoutManager
         }
         Log.d(ContentValues.TAG, "Sending to Adapter")
-        adapter = ProductRecyclerViewAdapter(marketProduce)
+        adapter = ProductRecyclerViewAdapter(marketProduce, marketTitle, productCategory)
         if (recyclerView != null) {
             recyclerView.adapter = adapter
         }

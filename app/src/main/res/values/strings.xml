@@ -31,7 +31,10 @@
     <string name="market_card_image">image</string>
     <string name="market_card_title">title</string>
     <string name="market_card">title</string>
+    <string name="product_card_image">image</string>
     <string name="image_of_product">Product Image</string>
     <string name="choose_a_farmer">Choose a Farmer</string>
     <string name="use_and_storage">Use and Storage</string>
+    <string name="storage">Storage Information</string>
+    <string name="description">Description</string>
 </resources>

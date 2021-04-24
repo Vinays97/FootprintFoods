@@ -27,7 +27,7 @@ class MarketActivity : AppCompatActivity() {
     // Setup Firebase variables
     private val db = Firebase.firestore
     // Setup Market DB variables
-    private lateinit var marketTitle: String
+    lateinit var marketTitle: String
     private lateinit var marketDate: String
     private lateinit var transitionImage: String
     private lateinit var transitionTitle: String
