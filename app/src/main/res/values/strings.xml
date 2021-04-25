@@ -5,6 +5,7 @@
     <string name="user_image">User Image</string>
     <string name="orders">Orders</string>
     <string name="favorites">Favorites</string>
+    <string name="FavouritesSoon">Favorites (Coming soon)</string>
     <string name="address">Address</string>
     <string name="vouchers">Vouchers</string>
     <string name="settings">Settings</string>
@@ -22,7 +23,7 @@
     <string name="empty" />
     <string name="markets">Markets</string>
     <string name="marketDescription">The Farmers\' and Craft market is held on the second Wednesday of each month between 8am and 4pm. Due to the historic Loughborough Fair visiting the town in November, the date may change in that month.</string>
-    <string name="calendar">Calendar</string>
+    <string name="calendar">Calendar (Coming soon)</string>
     <string name="market">Market</string>
     <string name="image_of_market">Image of Market</string>
     <string name="back_button">Back button</string>
@@ -43,4 +44,5 @@
     <string name="place_order">PLACE ORDER</string>
     <string name="unitText">CO₂e (t CO₂e/year) is the abbreviation for the unit of CO₂ emissions, in tonnes, per year. The number above represents the amount of CO₂ you have saved just by ordering through our application. A big thanks from us, the Footprint Foods team!</string>
     <string name="co2Unit">CO₂e</string>
+    <string name="vouchersSoon">Vouchers (Coming soon)</string>
 </resources>
