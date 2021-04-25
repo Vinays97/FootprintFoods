@@ -192,6 +192,21 @@
                     app:layout_constraintTop_toBottomOf="@id/productDetailsUsageDescription"
                     />
 
+                <TextView
+                    android:id="@+id/productDetailsTotalPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:textAppearance="@style/TextAppearance.FootprintFoods.Headline5"
+                    android:textSize="26sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/productDetailsUsageSpace"
+                    />
+
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/productDetailsQuantityLayout"
                     android:layout_width="match_parent"
@@ -200,7 +215,7 @@
                     android:orientation="horizontal"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/productDetailsUsageSpace"
+                    app:layout_constraintTop_toBottomOf="@id/productDetailsTotalPrice"
                     >
 
                     <Button
@@ -222,6 +237,7 @@
                         android:layout_height="wrap_content"
                         android:text="1"
                         android:textAppearance="@style/TextAppearance.FootprintFoods.Headline4"
+                        android:textSize="40sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -244,13 +260,16 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/productDetailsAddToCart"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="56dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginHorizontal="46dp"
                     android:gravity="center"
                     android:text="@string/add_to_cart"
+                    android:textSize="16sp"
                     android:backgroundTint="@color/colorAccent"
+                    app:cornerRadius="8dp"
                     app:elevation="4dp"
                     app:layout_constraintTop_toBottomOf="@id/productDetailsQuantityLayout"
                     app:layout_constraintStart_toStartOf="parent"

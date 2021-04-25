@@ -183,4 +183,9 @@
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         />
 
+    <!--
+    <include layout="@layout/cart_sheet" />
+    -->
+    <include layout="@layout/cart_sheet" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

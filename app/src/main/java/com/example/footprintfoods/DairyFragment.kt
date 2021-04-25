@@ -40,7 +40,7 @@ class DairyFragment : Fragment() {
             recyclerView.layoutManager = layoutManager
         }
         Log.d(ContentValues.TAG, "Sending to Adapter")
-        adapter = ProductRecyclerViewAdapter(marketProduce, marketTitle, productCategory)
+        adapter = ProductRecyclerViewAdapter(marketProduce, marketTitle, productCategory, activity as MarketActivity)
         if (recyclerView != null) {
             recyclerView.adapter = adapter
         }

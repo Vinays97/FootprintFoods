@@ -1,6 +1,7 @@
 package com.example.footprintfoods
 
 import android.content.ContentValues
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,14 +9,13 @@ import android.os.Handler
 import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.transition.MaterialContainerTransform
 import com.google.firebase.firestore.ktx.firestore
@@ -44,6 +44,8 @@ class MarketActivity : AppCompatActivity() {
     var marketProduceDairy = arrayListOf<String>()
     // Setup other variables
     private var arrayTabs = arrayListOf<String>()
+    private lateinit var bottomSheet: LinearLayout
+    var cartData = arrayListOf<String>()
     // onCreate function
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +69,9 @@ class MarketActivity : AppCompatActivity() {
         val marketMapButton = findViewById<Button>(R.id.marketToolbarButtonLocation)
         val backButton = findViewById<ImageView>(R.id.marketBackButton)
         val marketDescription = findViewById<TextView>(R.id.marketToolbarDescription)
+        bottomSheet = findViewById(R.id.cartSheetLinearLayout)
+        val bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         // Set animation
         val marketActivityView = findViewById<View>(R.id.marketActivityView)
         marketActivityView.transitionName = transitionTitle
@@ -89,6 +94,41 @@ class MarketActivity : AppCompatActivity() {
             Handler().postDelayed({
                 setupTabs()
                 supportStartPostponedEnterTransition()}, 200)}, 200)
+    }
+    // onActivityResult function
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (data != null) {
+            cartData.add(data.getStringExtra("cartInfo"))
+            Log.d("Cart Data", cartData.toString())
+        }
+        val bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        val cartTotal = findViewById<TextView>(R.id.cartTotal)
+        val cartButton = findViewById<Button>(R.id.cartButton)
+        val cartBar = findViewById<ConstraintLayout>(R.id.cartSheetConstraintLayout)
+        cartBar.setOnClickListener {
+            if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_COLLAPSED){
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+            } else {
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            }
+        }
+        cartButton.setOnClickListener {
+            if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_COLLAPSED){
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+            } else {
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            }
+        }
+        var totalPrice: Double = 0.0
+        for (item in cartData){
+            val price = item.substring(0, item.indexOf("/")).toDouble()
+            totalPrice += price
+        }
+        val totalFormat = String.format("%.2f", totalPrice)
+        val cartTotalText = "£$totalFormat"
+        cartTotal.text = cartTotalText
     }
     // Database pull function
     private fun databasePull() {

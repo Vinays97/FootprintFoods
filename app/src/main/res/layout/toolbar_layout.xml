@@ -72,8 +72,9 @@
                     android:id="@+id/welcomeMessageText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
                     android:layout_marginStart="1dp"
-                    android:text="@string/hungry"
+                    android:text="@string/welcomeText"
                     android:textColor="@color/black"
                     android:textAppearance="@style/TextAppearance.FootprintFoods.Body2"
                     />

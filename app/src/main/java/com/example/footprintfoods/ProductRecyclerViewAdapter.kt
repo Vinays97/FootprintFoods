@@ -2,6 +2,7 @@ package com.example.footprintfoods
 
 import android.app.Activity
 import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,11 +14,12 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class ProductRecyclerViewAdapter(marketProduceImport: MutableList<String>, marketTitleImport: String, productCategoryImport: String) : RecyclerView.Adapter<ProductRecyclerViewAdapter.ViewHolder>() {
+class ProductRecyclerViewAdapter(marketProduceImport: MutableList<String>, marketTitleImport: String, productCategoryImport: String, contextImport: Context) : RecyclerView.Adapter<ProductRecyclerViewAdapter.ViewHolder>() {
     // Assign Variables
     private val marketProduce = marketProduceImport
     private val marketTitle = marketTitleImport
     private val productCategory = productCategoryImport
+    private val context = contextImport
     // Inner class
     inner class ViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView){
         // Initialise card variables
@@ -42,7 +44,8 @@ class ProductRecyclerViewAdapter(marketProduceImport: MutableList<String>, marke
                 Log.d(ContentValues.TAG, "Product Price: $prodPrice")
                 val url = rem2.substring(rem2.indexOf("/") + 1, rem2.length - 1)
                 Log.d(ContentValues.TAG, "URL: $url")
-                val intent = Intent(v.context, ProductActivity::class.java)
+                val requestCode = 1
+                val intent = Intent(context, ProductActivity::class.java)
                 intent.putExtra("prodTitle", prodTitle)
                 intent.putExtra("prodCarbon", prodCarbon)
                 intent.putExtra("prodPrice", prodPrice)
@@ -54,7 +57,7 @@ class ProductRecyclerViewAdapter(marketProduceImport: MutableList<String>, marke
                         v.context as Activity,
                         image,
                         R.string.product_card_image.toString())
-                v.context.startActivity(intent, options.toBundle())
+                (context as Activity).startActivityForResult(intent, requestCode, options.toBundle())
             }
         }
     }
