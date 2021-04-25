@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
     tools:context=".HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -11,19 +12,53 @@
         android:layout_height="match_parent"
         android:background="@color/white">
 
-        <TextView
-            android:id="@+id/welcomeText"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/co2Saved"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/home"
-            android:textAppearance="@style/TextAppearance.FootprintFoods.Body2"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            android:layout_margin="56dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity="center_horizontal"
+            >
+
+            <TextView
+                android:id="@+id/homeNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="20"
+                android:textStyle="bold"
+                android:textAppearance="@style/TextAppearance.FootprintFoods.Headline1"
+                android:textColor="@color/colorAccentDark"
+                />
+
+            <TextView
+                android:id="@+id/homeUnit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="CO₂e"
+                android:textAppearance="@style/TextAppearance.FootprintFoods.Headline3"
+                android:textColor="@color/homeUnit"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/unitText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginBottom="120dp"
+            android:textAppearance="@style/TextAppearance.FootprintFoods.Body1"
+            android:textSize="18sp"
+            android:text="@string/unitText"
+            app:layout_constraintTop_toBottomOf="@id/co2Saved"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </FrameLayout>

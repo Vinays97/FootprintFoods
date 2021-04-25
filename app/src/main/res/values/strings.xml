@@ -19,7 +19,6 @@
     <string name="search_bar_market">Find a market</string>
     <string name="search_bar_order">Find an order</string>
     <string name="search_bar_calendar">Find a date</string>
-    <string name="test">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
     <string name="empty" />
     <string name="markets">Markets</string>
     <string name="marketDescription">The Farmers\' and Craft market is held on the second Wednesday of each month between 8am and 4pm. Due to the historic Loughborough Fair visiting the town in November, the date may change in that month.</string>
@@ -40,4 +39,8 @@
     <string name="add_to_cart">ADD TO CART</string>
     <string name="tab">\u0009</string>
     <string name="cart_total">Cart Total</string>
+    <string name="checkout">CHECKOUT</string>
+    <string name="place_order">PLACE ORDER</string>
+    <string name="unitText">CO₂e (t CO₂e/year) is the abbreviation for the unit of CO₂ emissions, in tonnes, per year. The number above represents the amount of CO₂ you have saved just by ordering through our application. A big thanks from us, the Footprint Foods team!</string>
+    <string name="co2Unit">CO₂e</string>
 </resources>

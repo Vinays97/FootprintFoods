@@ -2,7 +2,6 @@ package com.example.footprintfoods
 
 import android.content.ContentValues
 import android.content.Intent
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -11,21 +10,21 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.view.isVisible
 import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.tabs.TabLayout
-import com.google.android.material.transition.MaterialContainerTransform
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
 import kotlin.collections.ArrayList
 
 class MarketActivity : AppCompatActivity() {
     // Setup Firebase variables
     private val db = Firebase.firestore
+    private lateinit var mAuth: FirebaseAuth
     // Setup Market DB variables
     lateinit var marketTitle: String
     private lateinit var marketDate: String
@@ -45,7 +44,12 @@ class MarketActivity : AppCompatActivity() {
     // Setup other variables
     private var arrayTabs = arrayListOf<String>()
     private lateinit var bottomSheet: LinearLayout
+    private lateinit var bottomSheetConstraint: ConstraintLayout
     var cartData = arrayListOf<String>()
+    lateinit var cartTotal: TextView
+    lateinit var cartCarbonTotal: TextView
+    // Setup fragment variables
+    lateinit var cartFragment: CartFragment
     // onCreate function
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,8 +74,10 @@ class MarketActivity : AppCompatActivity() {
         val backButton = findViewById<ImageView>(R.id.marketBackButton)
         val marketDescription = findViewById<TextView>(R.id.marketToolbarDescription)
         bottomSheet = findViewById(R.id.cartSheetLinearLayout)
+        bottomSheetConstraint = findViewById(R.id.cartSheetConstraintLayoutPeeked)
         val bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        mAuth = FirebaseAuth.getInstance()
         // Set animation
         val marketActivityView = findViewById<View>(R.id.marketActivityView)
         marketActivityView.transitionName = transitionTitle
@@ -98,37 +104,116 @@ class MarketActivity : AppCompatActivity() {
     // onActivityResult function
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        val bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        val cartButton = findViewById<Button>(R.id.cartButton)
+        val cartBar = findViewById<ConstraintLayout>(R.id.cartSheetConstraintLayout)
+        val orderButton = findViewById<ExtendedFloatingActionButton>(R.id.cartPlaceOrder)
+        cartTotal = findViewById(R.id.cartTotal)
+        cartCarbonTotal = findViewById(R.id.cartCarbonTotal)
+        cartFragment = CartFragment()
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.cartFrameLayout, cartFragment)
+            .commit()
         if (data != null) {
             cartData.add(data.getStringExtra("cartInfo"))
             Log.d("Cart Data", cartData.toString())
         }
-        val bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-        val cartTotal = findViewById<TextView>(R.id.cartTotal)
-        val cartButton = findViewById<Button>(R.id.cartButton)
-        val cartBar = findViewById<ConstraintLayout>(R.id.cartSheetConstraintLayout)
+        updatePrice()
+        bottomSheetConstraint.setOnClickListener {
+            updatePrice()
+        }
         cartBar.setOnClickListener {
             if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_COLLAPSED){
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+                updatePrice()
             } else {
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                updatePrice()
             }
         }
         cartButton.setOnClickListener {
             if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_COLLAPSED){
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+                updatePrice()
             } else {
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                updatePrice()
             }
         }
-        var totalPrice: Double = 0.0
+        orderButton.setOnClickListener {
+            updatePrice()
+            val orderTotal = cartTotal.text.substring(1)
+            val orderCarbonTotal = cartCarbonTotal.text.substring(0, cartCarbonTotal.text.indexOf(" "))
+            sendToDB(orderTotal, orderCarbonTotal)
+        }
+    }
+    // Place order from cart function
+    private fun sendToDB(orderTotalImport: String, orderCarbonTotalImport: String) {
+        val user = mAuth.currentUser
+        val date = java.util.Calendar.getInstance()
+        val bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+        if (user != null){
+            val itemName = arrayListOf<String>()
+            val itemQuantity = arrayListOf<String>()
+            for (item in cartData){
+                val rem = item.substring(item.indexOf("/") + 1, item.length)
+                val name = rem.substring(0, rem.indexOf("/"))
+                val quantity = rem.substring(rem.indexOf("/") + 1, rem.lastIndexOf("/"))
+                itemName.add(name)
+                itemQuantity.add(quantity)
+            }
+            val data = hashMapOf(
+                    "OrderTotal" to orderTotalImport,
+                    "CarbonTotal" to orderCarbonTotalImport,
+                    "Produce" to itemName,
+                    "Quantity" to itemQuantity,
+                    "Market" to marketTitle,
+                    "MarketDate" to marketDate,
+                    "Date" to date
+            )
+            db.collection("User")
+                    .document(user.uid)
+                    .collection("Orders")
+                    .document()
+                    .set(data)
+        }
+        cartData.clear()
+        val cartButton = findViewById<Button>(R.id.cartButton)
+        val cartSheetConstraintLayout = findViewById<ConstraintLayout>(R.id.cartSheetConstraintLayout)
+        val cartTotalTextView = findViewById<TextView>(R.id.cartTotal)
+        val cartComplete = findViewById<TextView>(R.id.cartComplete)
+        cartButton.isVisible = false
+        cartTotalTextView.isVisible = false
+        cartSheetConstraintLayout.setBackgroundColor(getColor(R.color.success))
+        cartComplete.isVisible = true
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        Handler().postDelayed({
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+            Handler().postDelayed({
+                cartComplete.isVisible = false
+                cartButton.isVisible = true
+                cartTotalTextView.isVisible = true
+                cartSheetConstraintLayout.setBackgroundColor(getColor(R.color.colorAccent))
+            }, 200)}, 1500)
+    }
+    // Update price function
+    private fun updatePrice() {
+        var totalPrice = 0.0
+        var totalCarbon = 0.0
         for (item in cartData){
             val price = item.substring(0, item.indexOf("/")).toDouble()
+            val carbon = item.substring(item.lastIndexOf("/") + 1, item.length).toDouble()
             totalPrice += price
+            totalCarbon += carbon
         }
-        val totalFormat = String.format("%.2f", totalPrice)
-        val cartTotalText = "£$totalFormat"
+        val totalPriceFormat = String.format("%.2f", totalPrice)
+        val totalCarbonFormat = String.format("%.2f", totalCarbon)
+        val cartTotalText = "£$totalPriceFormat"
+        val cartCarbonTotalText = "$totalCarbonFormat CO₂e"
         cartTotal.text = cartTotalText
+        cartCarbonTotal.text = cartCarbonTotalText
     }
     // Database pull function
     private fun databasePull() {

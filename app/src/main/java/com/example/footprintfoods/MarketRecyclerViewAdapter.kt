@@ -47,7 +47,7 @@ class MarketRecyclerViewAdapter(itemTitlesImport: MutableList<String>, itemURLsI
                 val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                         v.context as Activity,
                         Pair(image, R.string.market_card_image.toString()) as Pair<View, String>,
-                        Pair(marketCards, R.string.market_card_title.toString()) as Pair<View, String>)
+                        Pair(marketCards, R.string.market_card_title.toString()))
                 v.context.startActivity(intent, options.toBundle())
             }
         }

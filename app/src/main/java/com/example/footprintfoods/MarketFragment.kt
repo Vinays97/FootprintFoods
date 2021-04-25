@@ -31,8 +31,6 @@ class MarketFragment : Fragment() {
         val itemTitles = (activity as HomeActivity).itemTitles
         val itemURLs = (activity as HomeActivity).itemURLs
         val itemDates = (activity as HomeActivity).itemDates
-
-        Log.d(ContentValues.TAG, "Event after DB pull")
         // Initialise layoutManager
         val recyclerView = view.findViewById<RecyclerView>(R.id.marketRecyclerView)
         layoutManager = LinearLayoutManager(activity)

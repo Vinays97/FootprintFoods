@@ -10,38 +10,35 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class OrderFragment : Fragment() {
+class CartFragment : Fragment() {
     // Initialise RecyclerView variables
     private var layoutManager : RecyclerView.LayoutManager? = null
-    private var adapter : RecyclerView.Adapter<OrdersRecyclerViewAdapter.ViewHolder>? = null
+    private var adapter : RecyclerView.Adapter<CartRecyclerViewAdapter.ViewHolder>? = null
     // onCreate function
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
     // onCreateView function
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_order, container, false)
+        return inflater.inflate(R.layout.fragment_cart, container, false)
     }
-    // onViewCreated
+    // onViewCreated function
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // Initialise variables
-        val orders = (activity as HomeActivity).orders
+        // Initialise Variables
+        val cartData = (activity as MarketActivity).cartData
         // Initialise layoutManager
-        val recyclerView = view.findViewById<RecyclerView>(R.id.orderRecyclerView)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.cartRecyclerView)
         layoutManager = LinearLayoutManager(activity)
         if (recyclerView != null) {
             recyclerView.layoutManager = layoutManager
         }
         Log.d(ContentValues.TAG, "Sending to Adapter")
-        adapter = OrdersRecyclerViewAdapter(orders)
+        adapter = CartRecyclerViewAdapter(cartData)
         if (recyclerView != null) {
             recyclerView.adapter = adapter
         }
     }
-
 }

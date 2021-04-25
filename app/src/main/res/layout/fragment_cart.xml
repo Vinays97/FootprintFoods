@@ -3,11 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".OrderFragment">
+    tools:context=".CartFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/orderRecyclerView"
+        android:id="@+id/cartRecyclerView"
         android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
